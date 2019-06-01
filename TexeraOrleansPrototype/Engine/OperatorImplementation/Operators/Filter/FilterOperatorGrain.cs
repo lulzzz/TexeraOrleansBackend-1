@@ -47,30 +47,41 @@ namespace Engine.OperatorImplementation.Operators
         {
             if(tuple.FieldList!=null)
             {
+                T v;
+                try
+                {
+                    v=Parse(tuple.FieldList[filterIndex]);
+                }
+                catch(Exception ex)
+                {
+                    Console.WriteLine(tuple.FieldList[filterIndex]+" cannot be converted as "+type);
+                    return;
+                }
+
                 switch(type)
                 {
                     case FilterPredicate.FilterType.Equal:
-                        if(Parse(tuple.FieldList[filterIndex]).CompareTo(threshold)==0)
+                        if(v.CompareTo(threshold)==0)
                             output.Add(tuple);
                         break;
                     case FilterPredicate.FilterType.Greater:
-                        if(Parse(tuple.FieldList[filterIndex]).CompareTo(threshold)>0)
+                        if(v.CompareTo(threshold)>0)
                             output.Add(tuple);
                         break;
                     case FilterPredicate.FilterType.GreaterOrEqual:
-                        if(Parse(tuple.FieldList[filterIndex]).CompareTo(threshold)>=0)
+                        if(v.CompareTo(threshold)>=0)
                             output.Add(tuple);
                         break;
                     case FilterPredicate.FilterType.Less:
-                        if(Parse(tuple.FieldList[filterIndex]).CompareTo(threshold)<0)
+                        if(v.CompareTo(threshold)<0)
                             output.Add(tuple);
                         break;
                     case FilterPredicate.FilterType.LessOrEqual:
-                        if(Parse(tuple.FieldList[filterIndex]).CompareTo(threshold)<=0)
+                        if(v.CompareTo(threshold)<=0)
                             output.Add(tuple);
                         break;
                     case FilterPredicate.FilterType.NotEqual:
-                        if(Parse(tuple.FieldList[filterIndex]).CompareTo(threshold)!=0)
+                        if(v.CompareTo(threshold)!=0)
                             output.Add(tuple);
                         break;
                 }   
