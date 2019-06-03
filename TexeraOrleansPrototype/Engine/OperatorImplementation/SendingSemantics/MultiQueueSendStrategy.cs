@@ -38,7 +38,7 @@ namespace Engine.OperatorImplementation.SendingSemantics
             string sender,receiver;
             sender=Utils.GetReadableName(message.Value.SenderIdentifer);
             receiver=Utils.GetReadableName(nextGrain);
-            Console.WriteLine(sender+" begin sending a message");
+            //Console.WriteLine(sender+" begin sending a message");
             await nextGrain.ReceivePayloadMessage(message).ContinueWith(async (t)=>
             {
                 if(Utils.IsTaskTimedOutAndStillNeedRetry(t,retryCount))
@@ -51,7 +51,7 @@ namespace Engine.OperatorImplementation.SendingSemantics
                     Console.WriteLine(sender+" re-send message with sequence num: "+message.Value.SequenceNumber +" to "+receiver+" successed!");
                 }
             });
-            Console.WriteLine(sender+" end sending a message");
+            //Console.WriteLine(sender+" end sending a message");
         }
     }
 }

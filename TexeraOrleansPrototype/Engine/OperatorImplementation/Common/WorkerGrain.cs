@@ -358,9 +358,9 @@ namespace Engine.OperatorImplementation.Common
                 }
                 await Task.Factory.StartNew(()=>
                 {
-                    Console.WriteLine(Utils.GetReadableName(self)+" start sending tuples");
+                    //Console.WriteLine(Utils.GetReadableName(self)+" start sending tuples");
                     MakePayloadMessagesThenSend();
-                    Console.WriteLine(Utils.GetReadableName(self)+" finish sending tuples");
+                    //Console.WriteLine(Utils.GetReadableName(self)+" finish sending tuples");
                     if(currentEndFlagCount!=0)
                     {
                         StartGenerate(0);
