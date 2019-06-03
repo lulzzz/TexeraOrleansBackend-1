@@ -35,24 +35,23 @@ namespace Engine.OperatorImplementation.SendingSemantics
 
         protected async Task SendMessageTo(IWorkerGrain nextGrain,Immutable<PayloadMessage> message,int retryCount)
         {
+            string sender,receiver;
+            sender=Utils.GetReadableName(message.Value.SenderIdentifer);
+            receiver=Utils.GetReadableName(nextGrain);
+            Console.WriteLine(sender+" begin sending a message");
             await nextGrain.ReceivePayloadMessage(message).ContinueWith(async (t)=>
             {
                 if(Utils.IsTaskTimedOutAndStillNeedRetry(t,retryCount))
                 {
-                    string sender,receiver;
-                    sender=Utils.GetReadableName(message.Value.SenderIdentifer);
-                    receiver=Utils.GetReadableName(nextGrain);
                     Console.WriteLine(sender+" re-send message with sequence num: "+message.Value.SequenceNumber +" to "+receiver+" with retry count "+retryCount);
                     await SendMessageTo(nextGrain,message, retryCount + 1);
                 }
                 else if(retryCount>0)
                 {
-                    string sender,receiver;
-                    sender=Utils.GetReadableName(message.Value.SenderIdentifer);
-                    receiver=Utils.GetReadableName(nextGrain);
                     Console.WriteLine(sender+" re-send message with sequence num: "+message.Value.SequenceNumber +" to "+receiver+" successed!");
                 }
             });
+            Console.WriteLine(sender+" end sending a message");
         }
     }
 }
