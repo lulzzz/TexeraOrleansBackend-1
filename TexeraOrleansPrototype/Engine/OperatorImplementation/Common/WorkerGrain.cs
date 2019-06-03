@@ -345,20 +345,22 @@ namespace Engine.OperatorImplementation.Common
                 }
                 if(isPaused)
                 {
-                    Console.WriteLine(Utils.GetReadableName(self)+" Paused before generating tuples");
+                    //Console.WriteLine(Utils.GetReadableName(self)+" Paused before generating tuples");
                     taskDidPaused=true;
                     return;
                 }
                 await GenerateTuples();
                 if(isPaused)
                 {
-                    Console.WriteLine(Utils.GetReadableName(self)+" Paused after generating tuples");
+                    //Console.WriteLine(Utils.GetReadableName(self)+" Paused after generating tuples");
                     taskDidPaused=true;
                     return;
                 }
                 await Task.Factory.StartNew(()=>
                 {
+                    Console.WriteLine(Utils.GetReadableName(self)+" start sending tuples");
                     MakePayloadMessagesThenSend();
+                    Console.WriteLine(Utils.GetReadableName(self)+" finish sending tuples");
                     if(currentEndFlagCount!=0)
                     {
                         StartGenerate(0);
