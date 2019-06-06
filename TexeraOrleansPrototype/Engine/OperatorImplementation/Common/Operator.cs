@@ -89,7 +89,11 @@ namespace Engine.OperatorImplementation.Common
 
         public async Task Pause()
         {
+            TimeSpan t = (DateTime.UtcNow - new DateTime(1970, 1, 1));
+            Console.WriteLine(this+" sending pause at"+t.TotalSeconds);
             await PrincipalGrain.Pause();
+            t = (DateTime.UtcNow - new DateTime(1970, 1, 1));
+            Console.WriteLine(this+" paused at "+t.TotalSeconds);
         }
 
         public async Task Resume()
