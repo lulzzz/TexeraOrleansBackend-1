@@ -177,7 +177,7 @@ namespace Engine.OperatorImplementation.Common
                 pausedMessages.Add(message);
                 return Task.CompletedTask;
             }
-            Console.WriteLine("Received Payload");
+            Console.WriteLine(Utils.GetReadableName(self)+" Received Payload");
             if(orderingEnforcer.PreProcess(message))
             {
                 bool isEnd=message.Value.IsEnd;
