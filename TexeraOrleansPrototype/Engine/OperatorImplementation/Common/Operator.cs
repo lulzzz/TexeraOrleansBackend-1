@@ -98,7 +98,11 @@ namespace Engine.OperatorImplementation.Common
 
         public async Task Resume()
         {
+            TimeSpan t = (DateTime.UtcNow - new DateTime(1970, 1, 1));
+            Console.WriteLine(this+" sending resume at"+t.TotalSeconds);
             await PrincipalGrain.Resume();
+            t = (DateTime.UtcNow - new DateTime(1970, 1, 1));
+            Console.WriteLine(this+" resumed at "+t.TotalSeconds);
         }
 
         public async Task Deactivate()

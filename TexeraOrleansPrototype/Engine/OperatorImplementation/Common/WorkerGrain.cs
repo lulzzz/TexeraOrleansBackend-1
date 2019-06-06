@@ -407,13 +407,13 @@ namespace Engine.OperatorImplementation.Common
         {
             TimeSpan t = (DateTime.UtcNow - new DateTime(1970, 1, 1));
             Console.WriteLine(Utils.GetReadableName(self)+" received control message at "+(int)t.TotalSeconds);
-            List<ControlMessage.ControlMessageType> executeSequence = orderingEnforcer.PreProcess(message);
-            if(executeSequence!=null)
-            {
-                orderingEnforcer.CheckStashed(ref executeSequence,message.Value.SenderIdentifer);
-                foreach(ControlMessage.ControlMessageType type in executeSequence)
-                {
-                    switch(type)
+            // List<ControlMessage.ControlMessageType> executeSequence = orderingEnforcer.PreProcess(message);
+            // if(executeSequence!=null)
+            // {
+            //     orderingEnforcer.CheckStashed(ref executeSequence,message.Value.SenderIdentifer);
+            //     foreach(ControlMessage.ControlMessageType type in executeSequence)
+            //     {
+                    switch(message.Value.Type)
                     {
                         case ControlMessage.ControlMessageType.Pause:
                             Pause();
@@ -428,8 +428,8 @@ namespace Engine.OperatorImplementation.Common
                             DeactivateOnIdle();
                             break;
                     }
-                }
-            }
+                // }
+            // }
             return Task.CompletedTask;
         }
         

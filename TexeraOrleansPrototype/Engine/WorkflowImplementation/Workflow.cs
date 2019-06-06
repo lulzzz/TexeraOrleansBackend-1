@@ -49,7 +49,7 @@ namespace Engine.WorkflowImplementation
         {
             //await workflowControllerGrain.Pause(AllOperators);
             List<Task> taskList=new List<Task>();
-            foreach(Operator o in AllOperators)
+            foreach(Operator o in StartOperators)
             {
                 taskList.Add(o.Pause());
             }
