@@ -16,6 +16,7 @@ namespace Engine.Controller
         private IControllerGrain self;
         public async Task Init(IControllerGrain self,Guid workflowID, HashSet<Operator> graph)
         {
+            Console.WriteLine("Controller inited");
             this.self=self;
             WorkflowID=workflowID;
             foreach(Operator o in graph)
