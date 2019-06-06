@@ -44,9 +44,11 @@ namespace Engine.Controller
             List<Task> taskList=new List<Task>();
             foreach(Operator o in graph)
             {
+                Console.WriteLine("Controller sends to "+o);
                 taskList.Add(o.Pause());
             }
             await Task.WhenAll(taskList);
+            Console.WriteLine("Controller returns");
         }
     }
 }
