@@ -4,6 +4,7 @@ using Engine.Controller;
 using Orleans;
 using System.Threading.Tasks;
 using System;
+using Orleans.Runtime;
 
 namespace Engine.WorkflowImplementation
 {
@@ -40,6 +41,7 @@ namespace Engine.WorkflowImplementation
             {
                 o.SetPrincipalGrain(factory);
             }
+            RequestContext.Set("grainIndex",1);
             await workflowControllerGrain.Init(workflowControllerGrain,WorkflowID,AllOperators);
         }
 

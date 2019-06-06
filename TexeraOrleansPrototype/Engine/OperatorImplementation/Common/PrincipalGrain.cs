@@ -62,6 +62,7 @@ namespace Engine.OperatorImplementation.Common
 
         public virtual async Task Init(IControllerGrain controllerGrain, Guid workflowID, Operator currentOperator)
         {
+            Console.WriteLine(this.GetType()+" Inited!");
             this.controllerGrain=controllerGrain;
             this.workflowID=workflowID;
             this.operatorID=currentOperator.OperatorGuid;
