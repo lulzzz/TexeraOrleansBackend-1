@@ -106,7 +106,10 @@ namespace Engine.OperatorImplementation.Common
                 // {
                 //     RequestContext.Set("targetSilo",prevAllocation[i%prevAllocation.Count]);
                 // }
-                RequestContext.Set("grainIndex",i);
+                if(Utils.GetReadableName(grain).Contains("Filter"))
+                    RequestContext.Set("grainIndex",1);
+                else
+                    RequestContext.Set("grainIndex",0);
                 SiloAddress addr=await grain.Init(grain,predicate,self);
                 if(!operatorGrains[0].ContainsKey(addr))
                 {

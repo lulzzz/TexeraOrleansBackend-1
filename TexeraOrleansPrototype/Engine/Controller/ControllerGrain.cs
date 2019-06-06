@@ -20,6 +20,7 @@ namespace Engine.Controller
             WorkflowID=workflowID;
             foreach(Operator o in graph)
             {
+                RequestContext.Set("grainIndex",0);
                 await o.PrincipalGrain.Init(self,workflowID,o);
             }
             foreach(Operator o in graph)
